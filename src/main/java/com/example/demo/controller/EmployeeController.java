@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.constants.ErrorMessage;
 import com.example.demo.constants.SuccessMessage;
 import com.example.demo.constants.URLConstants;
+import com.example.demo.dto.Employee01DTO;
 import com.example.demo.dto.EmployeeDTO;
 import com.example.demo.serviceinterface.EmployeeServiceIn;
 
@@ -25,6 +26,7 @@ public class EmployeeController {
         ResponseEntity<String> response;
         try {
             ResponseEntity<String> result = employeeServiceIn.saveEmployeeDetails(employeeDTO);
+            System.out.println("the value of the status code "+result.getStatusCodeValue());
             // Check if the result indicates success
             if (result.getStatusCode() == HttpStatus.OK) {
                 response = ResponseEntity.status(HttpStatus.CREATED).body(SuccessMessage.DATA_SAVED_SUCCESSFULLY);
@@ -37,5 +39,6 @@ public class EmployeeController {
         }
         return response;
     }
+	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.constants.ErrorMessage;
 import com.example.demo.constants.SuccessMessage;
+import com.example.demo.dto.Employee01DTO;
 import com.example.demo.dto.EmployeeDTO;
 import com.example.demo.employeerepository.EmployeeRepository;
 import com.example.demo.entity.Employee;
@@ -22,6 +23,8 @@ public class EmployeeService implements EmployeeServiceIn {
 		// TODO Auto-generated method stub
 		 try {
 	            Employee dtoToEmployeeClass = dtoToEmployeeClass(employDto);
+	            System.out.println(dtoToEmployeeClass.getCompany()+" : "+dtoToEmployeeClass.getDob()+" : "+dtoToEmployeeClass.getEducation()+" : "+dtoToEmployeeClass.getEmail()+" : "+dtoToEmployeeClass.getExperience()+" : "+dtoToEmployeeClass.getFirstName()+" : "+dtoToEmployeeClass.getGender()+" : "+
+	            dtoToEmployeeClass.getLastName()+" : "+dtoToEmployeeClass.getAnnualPackage());
 	            employeeRepository.saveEmployeeDetails(
 	                dtoToEmployeeClass.getCompany(),
 	                dtoToEmployeeClass.getDob(),
@@ -37,6 +40,7 @@ public class EmployeeService implements EmployeeServiceIn {
 	            return ResponseEntity.status(HttpStatus.OK).body(SuccessMessage.DATA_SAVED_SUCCESSFULLY);
 	        } catch (Exception e) {
 	            // Handle the exception and return a failure response
+	        	e.printStackTrace();
 	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorMessage.SERVER_SIDE_ERROR_WHILE_SAVING_THE_DATA + e.getMessage());
 	        }
 	}
@@ -51,5 +55,7 @@ public class EmployeeService implements EmployeeServiceIn {
 		ModelMapper mm = new ModelMapper();
 		return mm.map(entity, EmployeeDTO.class);
 	}
+
+	
 
 }
