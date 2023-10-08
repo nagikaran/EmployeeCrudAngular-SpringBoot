@@ -56,7 +56,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Package</mat-label>
-            <input matInput type="text" placeholder="Package"  type="number" formControlName="package">
+            <input matInput type="text" placeholder="Package"  type="number" formControlName="annualPackage">
             <mat-hint>In rupees</mat-hint>
           </mat-form-field>
 
@@ -64,7 +64,7 @@
 </div>
 <div mat-dialog-actions class="action">
     <div class="button-left">
-        <button mat-raised-button color="warn" onsubmit="clearTheFormAndClose()">
+        <button mat-raised-button color="warn" type="button" (click)="clearTheFormAndClose();">
             Cancel
            </button>
            <button mat-raised-button color="primary" type="submit">

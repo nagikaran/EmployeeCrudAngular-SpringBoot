@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EmployeeServiceService } from '../service/employee-service.service';
+
 
 @Component({
   selector: 'app-emp-add-edit',
@@ -16,7 +18,8 @@ education:String[]=[
   "Engineering",
   "Master Engineering"
 ];
-constructor(private _fb:FormBuilder,private _dialog:MatDialog){
+constructor(private _fb:FormBuilder,private _dialog:MatDialog,private employeeService:EmployeeServiceService,
+  private dialogRef:MatDialogRef<EmpAddEditComponent>){
   this.empForm=_fb.group({
     firstName:'',
     lastName:'',
@@ -26,23 +29,28 @@ constructor(private _fb:FormBuilder,private _dialog:MatDialog){
     education:'',
     company:'',
     experience:'',
-    package:'',
-
-
+    annualPackage:'',
   })
 }
 
 onFormSubmit(){
   if(this.empForm.valid){
-    console.log(this.empForm.value)
+    this.employeeService.saveEmployeeDetails(this.empForm.value).subscribe({
+      next:(val:any)=>{
+        alert("Emplyee added successfully");
+        this.dialogRef.close(true);
+      },
+            error:(err:any)=>{
+              alert("Somethingh went wrong while saving the data");
+              console.error(err);
+            },
+    })
+    //console.log(this.empForm.value)
   }
 }
 
 clearTheFormAndClose(){
-  alert("hello");
   this._dialog.closeAll();
-
-
 }
 
 }

@@ -5,4 +5,13 @@
     background-color: #c2e0ef; 
     color: #031003;
   }
+
+  .main-body{
+    padding-top: 20px;
+    margin: 0 auto;
+    max-width: 1248px;
+    mat-form-field{
+      width: 100%;
+    }
+  }
   

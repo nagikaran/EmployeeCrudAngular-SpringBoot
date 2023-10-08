@@ -7,8 +7,9 @@ import { Employee } from '../model/employee';
 })
 export class EmployeeServiceService {
   
-  employeeSaveUrl:string="http://localhost:8085/saveData";
-
+  employeeSaveUrl:string="http://localhost:9999/api/v1/employee/saveEmployeeDetails";
+  employeeGetListOfData:string="http://localhost:9999/api/v1/employee/getEmployeeData";
+  deleteEmployeeAsPerId:string="http://localhost:9999/api/v1/employee/delete/";
   constructor(private http:HttpClient) { }
   employee:Employee={
     id: 0,
@@ -20,10 +21,21 @@ export class EmployeeServiceService {
     education:'',
     company:'',
     experience:0,
-    packages:0
+    annualPackage:0
   }
   saveEmployeeDetails(employee:Employee)
   {
     return this.http.post(this.employeeSaveUrl,employee);
   }
+
+  getAllEmployeeData(){
+    return this.http.get<Employee[]>(this.employeeGetListOfData)
+    
+  }
+
+  deleteEmployee(id:number){
+    return this.http.delete(this.deleteEmployeeAsPerId+id)
+
+  }
+  
 }
